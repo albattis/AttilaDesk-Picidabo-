@@ -1,0 +1,278 @@
+.nev
+{
+
+    text-align:right;
+    margin-right: 60px;
+}
+
+body
+{
+
+background-color: #7faedd;
+}
+.task_table
+{
+    background-color: #a8d9fc;
+    margin-left: 200px;
+    text-align: center;
+
+}
+
+.task_tabledata
+{
+    border-bottom: 1px coral dashed;
+}
+.task_table_row
+{
+    width: 100px;
+    height: 50px;
+}
+.task_table_row_description
+{
+    width: 200px;
+    height: 50px;
+}
+.task_tabledata_priority
+
+{
+    background-color: #007bff;
+    font-size: 20px;
+
+}
+.expired-time
+{
+    background-color:darkred;
+    width:400px;
+    height:200px;
+    text-align: center;
+    margin-top:50px;
+    font-size: 30px;
+}
+
+.warning-time
+{
+    background-color:lightyellow;
+    width:400px;
+    height:200px;
+    text-align: center;
+    margin-top:50px;
+    font-size: 30px;
+}
+.ok-time
+{
+    background-color:lightseagreen;
+    width:400px;
+    height:100px;
+    text-align: center;
+    margin-top:30px;
+    font-size: 30px;
+}
+.progress-bar-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 20px 0;
+    position: relative;
+}
+
+.progress-bar {
+    width: 100%;
+    background-color: #f3f3f3;
+}
+
+.progress-bar-fill {
+    height: 30px;
+    width: 0;
+    background-color: #4caf50;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+}
+
+.progress-bar-text {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30px;
+    line-height: 30px;
+    color: black;
+}
+
+.container-login
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f4f8;
+
+}
+.login-display
+{
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width:400px;
+}
+.login-display label
+{
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.login-display input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.5s;
+}
+
+.login-display input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.10) ;
+}
+
+
+
+
+.login-display .form-group
+{
+    margin-bottom: 15px;
+}
+body
+{
+    font-family: 'Roboto', sans-serif;
+}
+.login-display input[type="text"],
+.login-display input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    background-color: #a8d9fc;
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.6s, box-shadow 0.3s;
+}
+
+.login-display input[type="text"]:hover,
+.login-display input[type="password"]:hover {
+    background-color: #e2e6ea; /
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+
+.glow-button
+{
+    background: linear-gradient(45deg, #6e3b6e, #ff6ec7);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    padding: 10px 24px;
+    box-shadow: 0 5px 15px rgba(255, 110, 199, 0.3);
+    transition: box-shadow 0.3s ease;
+}
+.glow-button:hover
+{
+    box-shadow: 0 5px 15px rgba(255, 110, 199, 0.7);
+}
+
+
+ .btn-fancy-glow {
+     display: inline-block;
+     padding: 10px 20px;
+     font-size: 1rem;
+     font-weight: bold;
+     color: #ffffff;
+     text-align: center;
+     text-decoration: none;
+     background: linear-gradient(45deg, #007bff, #0056b3); /* Színátmenetes kék */
+     border-radius: 8px;
+     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.4), 0 0 20px rgba(0, 123, 255, 0.7);
+     transition: background 0.3s ease, box-shadow 0.3s ease;
+     position: relative;
+     overflow: hidden;
+ }
+
+.btn-fancy-glow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    transition: transform 0.5s ease;
+}
+
+.btn-fancy-glow:hover {
+    background: linear-gradient(45deg, #0056b3, #007bff); /* Színátmenetes kék váltás */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.6), 0 0 30px rgba(0, 123, 255, 0.9);
+}
+
+.btn-fancy-glow:hover::before {
+    transform: rotate(0deg);
+}
+
+.btn-gradient-glow {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    background: linear-gradient(45deg, #2196f3, #21cbf3); /* Színátmenetes kék */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(33, 203, 243, 0.4), 0 0 20px rgba(33, 203, 243, 0.7);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-gradient-glow::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    transition: transform 0.5s ease;
+}
+
+.btn-gradient-glow:hover {
+    background: linear-gradient(45deg, #21cbf3, #2196f3); /* Színátmenet váltás */
+    box-shadow: 0 4px 8px rgba(33, 203, 243, 0.6), 0 0 30px rgba(33, 203, 243, 0.9);
+}
+
+.btn-gradient-glow:hover::before {
+    transform: rotate(0deg);
+}
+
+.user-1 {
+    background-color: #d3d3d3; /* Szürke */
+}
+
+.user-2 {
+    background-color: #90ee90; /* Zöld */
+}
+
+.user-3 {
+    background-color: #ffffe0; /* Sárga */
+}

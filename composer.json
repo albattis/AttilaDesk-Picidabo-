@@ -1,0 +1,16 @@
+{
+    "require": {
+        "filp/whoops": "^2.9",
+        "phpmailer/phpmailer": "^6.9",
+      "ext-json": "*",
+      "ext-pdo": "*",
+        "firebase/php-jwt": "^6.10"
+    },
+    "autoload": {
+        "psr-4" : {
+            "app\\" : "src/app/",
+            "db\\" : "src/db/",
+            "helper\\" : "src/helper/"
+        }
+    }
+}
