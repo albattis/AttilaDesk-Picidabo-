@@ -2,7 +2,7 @@
 
 *Kompakt irodai rendszer valódi feladatokra.*
 
-![Screenshot](screenshot-intro.png)
+![Screenshot](screenshot-intro.jpeg)
 
 ## 🚀 Mi ez?
 
