@@ -11,7 +11,8 @@ class TaskController extends MainController
 
     public function actionIndex()
     {
-        $tasks = Task::findAll();
+        // Modern approach: Use JOIN to avoid N+1 queries
+        $tasks = Task::findAllWithUser();
 
         $this->title = 'Feladatok';
 

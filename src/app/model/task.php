@@ -25,6 +25,12 @@ private $task_end_date;
 private $user_id;
 private $ugyfel_id;
 
+/**
+ * Ad-hoc property for display convenience
+ * @var string|null
+ */
+public $user_fullname;
+
 
     public static function findAll()
     {
@@ -52,6 +58,42 @@ private $ugyfel_id;
 
         return $tasks;
 
+    }
+
+    public static function findAllWithUser()
+    {
+        $conn = Database::getConnection();
+        // SQL JOIN az N+1 lekérdezések elkerülése érdekében
+        $sql = "SELECT task.*, user.firstname, user.lastname
+                FROM task
+                LEFT JOIN user ON task.user_id = user.id
+                ORDER BY task_due_date DESC";
+        $statement = $conn->prepare($sql);
+        $statement->execute();
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $tasks = [];
+        foreach ($rows as $row)
+        {
+            $task = new self();
+            $task->setTaskId($row['task_id']);
+            $task->setTaskName($row['task_name']);
+            $task->setCategoryId($row['task_category_id']);
+            $task->setTaskDescription($row['task_description']);
+            $task->setTaskDueDate($row['task_due_date']);
+            $task->setTaskStatus($row['task_status']);
+            $task->setTaskPriority($row['task_priority']);
+            $task->setTaskEndDate($row['task_end_date']);
+            $task->setUserId($row['user_id']);
+            $task->setUgyfelId($row['ugyfel_id']);
+
+            // Ad-hoc property-ként átadjuk a user nevet, hogy ne kelljen újra lekérdezni
+            $task->user_fullname = $row['firstname'] . " " . $row['lastname'];
+
+            $tasks[] = $task;
+        }
+
+        return $tasks;
     }
 
 

@@ -11,12 +11,15 @@ class Database
     public static function getConnection()
     {
         if (null == self::$conn) {
-            $conf = include('config.php');
-            $db = $conf['db'];
-            self::$conn = new PDO("mysql:host=$db[host];dbname=$db[name];charset=$db[encoding]", $db['user'], $db['password']);
+            $host = getenv('DB_HOST') ?: 'localhost';
+            $name = getenv('DB_NAME') ?: 'attiladesk';
+            $user = getenv('DB_USER') ?: 'root';
+            $pass = getenv('DB_PASSWORD') ?: '';
+            $enc  = getenv('DB_ENCODING') ?: 'utf8';
+
+            self::$conn = new PDO("mysql:host=$host;dbname=$name;charset=$enc", $user, $pass);
         }
 
         return self::$conn;
-
     }
 }

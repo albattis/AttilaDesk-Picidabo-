@@ -1,33 +1,13 @@
 <?php
 
-use app\model\Ugyfel;
+use helper\Security;
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-    $ugyfel=new Ugyfel();
-
-    $ugyfel->setFirstname($_POST["firstname"]);
-    $ugyfel->setLastname($_POST["lastname"]);
-    $ugyfel->setZip($_POST["zip"]);
-    $ugyfel->setCountry($_POST["country"]);
-    $ugyfel->setStreet($_POST["street"]);
-    $ugyfel->setPhonenumber($_POST["phone"]);
-    $ugyfel->setEmail($_POST["email"]);
-
-    if($ugyfel->save()) {
-    ?>
-<script>alert("Az ügyfél sikeresen felvéve")</script><?php
-        header("Location: index.php?controller=User&action=index");
-    }else
-        {
-            ?>
-<script>alert("Az ügyfél nem került be az adatbázisba");</script>
-<?php        }
-
-
-}
-
+/** @var string|null $error */
 ?>
+
+<?php if (isset($error)): ?>
+    <script>alert("<?= Security::escape($error) ?>");</script>
+<?php endif; ?>
 
 <style>
 
@@ -110,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
 <div class="container-fluid-form mt-3 form-container">
     <form action="index.php?controller=ugyfel&action=insert" method="post">
+    <input type="hidden" name="csrf_token" value="<?= Security::generateCsrfToken() ?>">
     <div class="row">
         <div class="col-12">
             <h1>Ügyfél felvétele</h1>

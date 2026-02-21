@@ -52,7 +52,7 @@ class User
         }
 
         list($base64UrlHeader, $base64UrlPayload, $providedSignature) = $parts;
-        $secret = 'your-256-bit-secret';
+        $secret = getenv('JWT_SECRET') ?: 'your-256-bit-secret';
         $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, $secret, true);
         $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
 
@@ -94,7 +94,7 @@ class User
         $base64UrlHeader = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($header));
         $base64UrlPayload = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($payload));
 
-        $secret = "your-256-bit-secret";
+        $secret = getenv('JWT_SECRET') ?: "your-256-bit-secret";
         $signature = hash_hmac('sha256', $base64UrlHeader . "." . $base64UrlPayload, $secret, true);
         $base64UrlSignature = str_replace(['+', '/', '='], ['-', '_', ''], base64_encode($signature));
 
@@ -233,7 +233,8 @@ class User
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        // Modern password hashing
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 
     public static function findOneById($id)
@@ -283,8 +284,15 @@ class User
      */
     public function doLogin($password)
     {
-        if (hash('sha256', $password) == $this->password)
+        // Modern verification with legacy fallback for migration
+        if (password_verify($password, $this->password) || hash('sha256', $password) == $this->password)
         {
+            // Auto-migrate legacy SHA256 hashes to modern PASSWORD_DEFAULT
+            if (hash('sha256', $password) == $this->password && !password_verify($password, $this->password)) {
+                $this->setPassword($password);
+                $this->save();
+            }
+
             $_SESSION['user_id'] = $this->id;
             return $this->generateToken();
         }

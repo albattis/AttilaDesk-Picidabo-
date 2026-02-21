@@ -1,5 +1,6 @@
 <?php
 use app\model\Task;
+use helper\Security;
 
 /** @var
  * $tasks Task[]
@@ -40,11 +41,10 @@ $showClosedTasks = isset($_GET['showClosedTasks']) && $_GET['showClosedTasks'] =
                     <?php if($showClosedTasks && $task->getTaskEndDate() != "0000-00-00 00:00:00" || !$showClosedTasks && $task->getTaskEndDate() == "0000-00-00 00:00:00") { ?>
                     <?php if ($task->getTaskPriority() == "magas")
                     { ?><tr class="task_tabledata_priority"><?php } else { ?><tr class="task_tabledata"><?php } ?>
-                        <td><?=$task->getTaskId()?></td>
-                        <td><?=$task->getTaskDescription()?></td>
-                        <td><?=$task->getTaskDueDate()?></td>
-                        <?php $user = \app\model\User::findOneById($task->getUserId()); ?>
-                        <td><?=$user->getFirstname() . " " . $user->getLastname()?></td>
+                        <td><?= Security::escape($task->getTaskId()) ?></td>
+                        <td><?= Security::escape($task->getTaskDescription()) ?></td>
+                        <td><?= Security::escape($task->getTaskDueDate()) ?></td>
+                        <td><?= Security::escape($task->user_fullname ?? 'N/A') ?></td>
                         <td>
                             <div class="progress-bar-container">
                                 <div class="progress-bar" id="progress-bar-<?=$task->getTaskId()?>">

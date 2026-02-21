@@ -20,7 +20,7 @@ exit;
 }
 
 try {
-$secret_key = "your-256-bit-secret";
+$secret_key = getenv('JWT_SECRET') ?: "your-256-bit-secret";
 $jwt = $_SESSION['jwt'];
 $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
 
@@ -104,7 +104,7 @@ header("Location: index.php");
             $user->setFirstname($data['firstname']);
             $user->setLastname($data['lastname']);
             $user->setUsername($data['username']);
-            $user->setPassword(hash('sha256', $data['password']));
+            $user->setPassword($data['password']); // Hashing is handled inside the model
             $user->setAssignment($data['role']);
 
             if ($user->save()) {
@@ -135,7 +135,7 @@ header("Location: index.php");
         }
 
         try {
-            $secret_key = "your-256-bit-secret";
+            $secret_key = getenv('JWT_SECRET') ?: "your-256-bit-secret";
             $jwt = $_SESSION['jwt'];
             $decoded = JWT::decode($jwt, new Key($secret_key, 'HS256'));
 
