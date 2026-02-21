@@ -37,14 +37,14 @@ class Ugyfel
     {
 
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("UPDATE ugyfel SET firstname = :firstname, lastname = :lastname, zip = :zip, country = :city, street = :street, phonenumber = :phone, `email` = :email WHERE id = :id");
+        $stmt = $pdo->prepare("UPDATE ugyfel SET firstname = :firstname, lastname = :lastname, zip = :zip, country = :country, street = :street, phonenumber = :phonenumber, `email` = :email WHERE id = :id");
         $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
         $stmt->bindParam(':firstname', $this->firstname, PDO::PARAM_STR);
         $stmt->bindParam(':lastname', $this->lastname, PDO::PARAM_STR);
         $stmt->bindParam(':zip', $this->zip, PDO::PARAM_STR);
-        $stmt->bindParam(':city', $this->country, PDO::PARAM_STR);
+        $stmt->bindParam(':country', $this->country, PDO::PARAM_STR);
         $stmt->bindParam(':street', $this->street, PDO::PARAM_STR);
-        $stmt->bindParam(':phone', $this->phonenumber, PDO::PARAM_STR);
+        $stmt->bindParam(':phonenumber', $this->phonenumber, PDO::PARAM_STR);
         $stmt->bindParam(':email', $this->email, PDO::PARAM_STR);
         return $stmt->execute();
 

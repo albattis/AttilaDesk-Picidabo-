@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
 
     // Visszairányítás az űrlaphoz vagy egy siker oldalon
-    header("Location: /picidabo/index.php?controller=user&action=index");
+    header("Location: ../../../index.php?controller=user&action=index");
     exit();
 }
 ?>

@@ -9,7 +9,7 @@ use PDO;
 
 
 
-class ReaminingTime
+class RemainingTime
 {
     private $id;
     private $type;
@@ -20,33 +20,33 @@ private function daycounter(DateTime $date)
     return $date->format("d");
 }
 
-    public static function countDown($id,$recordingTimr)
+    public static function countDown($id,$recordingTime)
     {
 
-        $time=ReaminingTime::findOneByIdTime($id);
+        $time=self::findOneByIdTime($id);
 
         $datenow=new DateTime();
-        $datereamining = DateTime::createFromFormat('Y-m-d H:i:s.u', $recordingTimr);
-        $datereamining->modify('+'.$time.' day');
+        $dateremaining = DateTime::createFromFormat('Y-m-d H:i:s.u', $recordingTime);
+        $dateremaining->modify('+'.$time.' day');
 
-        if($datereamining<$datenow) //lejárt
+        if($dateremaining<$datenow) //lejárt
         {
-            $experierttime=$datereamining->diff($datenow);
-            if($experierttime->y >0)
+            $expiredtime=$dateremaining->diff($datenow);
+            if($expiredtime->y >0)
             {
-                ?><div class="expired-time"><?=$experierttime->y?> év <?=$experierttime->m ?> hónap <?=$experierttime->d ?> napja lejárt.</div>
+                ?><div class="expired-time"><?=$expiredtime->y?> év <?=$expiredtime->m ?> hónap <?=$expiredtime->d ?> napja lejárt.</div>
                 <script>alert("A Feladat lejárt. További intézkedést igényel.")</script>
                 <?php
             }
-            elseif($experierttime->m>0)
+            elseif($expiredtime->m>0)
             {
-                ?><div class="expired-time"> <?=$experierttime->m ?> hónap <?=$experierttime->d ?> napja lejárt.</div>
+                ?><div class="expired-time"> <?=$expiredtime->m ?> hónap <?=$expiredtime->d ?> napja lejárt.</div>
                 <script>alert("A Feladat lejárt. További intézkedést igényel.")</script>
                 <?php
             }
-            elseif($experierttime->d>0)
+            elseif($expiredtime->d>0)
             {
-                ?><div class="expired-time"><?=$experierttime->d ?> napja lejárt.</div>
+                ?><div class="expired-time"><?=$expiredtime->d ?> napja lejárt.</div>
                 <script>alert("A Feladat lejárt. További intézkedést igényel.")</script>
                 <?php
             }else
@@ -58,30 +58,30 @@ private function daycounter(DateTime $date)
 
         }else
         {
-            $experierttime=$datenow->diff($datereamining);
-            if($experierttime->y >0)
+            $expiredtime=$datenow->diff($dateremaining);
+            if($expiredtime->y >0)
             {
-                ?><div class="ok-time"><?=$experierttime->y?> év <?=$experierttime->m ?> hónap <?=$experierttime->d ?> napp múlva lejár.</div>
+                ?><div class="ok-time"><?=$expiredtime->y?> év <?=$expiredtime->m ?> hónap <?=$expiredtime->d ?> napp múlva lejár.</div>
 
                 <?php
             }
-            elseif($experierttime->m>0)
+            elseif($expiredtime->m>0)
             {
-                ?><div class="ok-time"> <?=$experierttime->m ?> hónap <?=$experierttime->d ?> nap múlva lejár.</div>
+                ?><div class="ok-time"> <?=$expiredtime->m ?> hónap <?=$expiredtime->d ?> nap múlva lejár.</div>
 
                 <?php
             }
             else
             {
-                if($experierttime->d>5)
+                if($expiredtime->d>5)
                 {
-                    ?><div class="ok-time"><?=$experierttime->d ?> nap múlva lejár.</div>
+                    ?><div class="ok-time"><?=$expiredtime->d ?> nap múlva lejár.</div>
 
                     <?php
                 }
-                elseif($experierttime->d>=1 && $experierttime->d<=4)
+                elseif($expiredtime->d>=1 && $expiredtime->d<=4)
                 {
-                    ?><div class="warning-time"><?=$experierttime->d ?> nap múlva lejár.</div>
+                    ?><div class="warning-time"><?=$expiredtime->d ?> nap múlva lejár.</div>
 
                     <?php
                 }

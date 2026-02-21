@@ -67,21 +67,32 @@ private $ugyfel_id;
             {
                 $sql = "UPDATE `task` SET `task_end_date` = :taskend WHERE `task`.`task_id` = :id;";
                 $statement = $conn->prepare($sql);
-                $statement->execute([ ':taskend' => $enddate, ':id' => $id ]); if ($statement->rowCount() > 0) { echo "A feladat dátuma sikeresen frissítve lett!"; } else { echo "A feladat dátuma nem lett frissítve. Ellenőrizd, hogy a `task_id` létezik és helyes-e."; } return $statement->fetchObject(self::class); } else { echo "Adatbázis kapcsolat sikertelen!"; } } catch (PDOException $e) { echo "Hiba történt: " . $e->getMessage(); }
-    self::Taskendstatus($id);
+                $statement->execute([ ':taskend' => $enddate, ':id' => $id ]);
+                self::Taskendstatus($id);
+                return $statement->rowCount() > 0;
+            }
+            return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
     public static function Taskendstatus($id)
     {
         try
         {
-
             $conn = Db::getConnection();
             if ($conn)
             {
                 $sql = "UPDATE `task` SET `task_status` = :taskend WHERE `task`.`task_id` = :id;";
                 $statement = $conn->prepare($sql);
-                $statement->execute([ ':taskend' => "befejezett", ':id' => $id ]); if ($statement->rowCount() > 0) { echo "A feladat dátuma sikeresen frissítve lett!"; } else { echo "A feladat dátuma nem lett frissítve. Ellenőrizd, hogy a `task_id` létezik és helyes-e."; } return $statement->fetchObject(self::class); } else { echo "Adatbázis kapcsolat sikertelen!"; } } catch (PDOException $e) { echo "Hiba történt: " . $e->getMessage(); }
+                $statement->execute([ ':taskend' => "befejezett", ':id' => $id ]);
+                return $statement->rowCount() > 0;
+            }
+            return false;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
     public static function ReopenTask($taskId)
     {
@@ -93,14 +104,7 @@ private $ugyfel_id;
         $stmt->bindParam(':id', $taskId, PDO::PARAM_INT);
         $stmt->bindParam(':end', $end, PDO::PARAM_STR);
         $stmt->execute();
-        if ($stmt->rowCount() > 0)
-        {
-            echo "Feladat visszanyitva.";
-        }
-        else
-        {
-            echo "Nem sikerült visszanyitni a feladatot.";
-        }
+        return $stmt->rowCount() > 0;
     }
 
 

@@ -109,14 +109,14 @@ class User
         $conn = Database::getConnection();
         if ($this->id) {
             // Ha már létezik a felhasználó, frissítjük az adatokat
-            $sql = "UPDATE user SET firstname = :firstname, lastname = :lastname, password = :password, assignment = :assignment, username = :username WHERE id = :id";
+            $sql = "UPDATE user SET firstname = :firstname, lastname = :lastname, password = :password, assignment = :assignment, nickname = :nickname WHERE id = :id";
             $stmt = $conn->prepare($sql);
             return $stmt->execute([
                 ':firstname' => $this->firstname,
                 ':lastname' => $this->lastname,
                 ':password' => $this->password,
                 ':assignment' => $this->assignment,
-                ':username' => $this->username,
+                ':nickname' => $this->username,
                 ':id' => $this->id
             ]);
         } else {
@@ -283,7 +283,7 @@ class User
      */
     public function doLogin($password)
     {
-        if (hash('sha256', $password) == $this->password)
+        if (password_verify($password, $this->password) || hash('sha256', $password) == $this->password)
         {
             $_SESSION['user_id'] = $this->id;
             return $this->generateToken();

@@ -1,6 +1,6 @@
 <?php
 
-use app\model\ReaminingTime;
+use app\model\RemainingTime;
 use app\model\task;
 use app\model\Ugyfel;
 use app\model\User;
@@ -55,10 +55,10 @@ function refreshpage()
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2 col-sm-12">
-            <a href="http://localhost/picidabo/index.php?controller=task&action=index" class="btn-gradient-glow btn">Vissza</a>
+            <a href="index.php?controller=task&action=index" class="btn-gradient-glow btn">Vissza</a>
         </div>
         <div class="col-md-2 col-sm-12">
-            <a href="http://localhost/picidabo/index.php?controller=task&action=index" class="btn-fancy-glow btn">Feladat bezárása</a>
+            <a href="index.php?controller=task&action=index" class="btn-fancy-glow btn">Feladat bezárása</a>
         </div>
     </div>
 </div>
@@ -99,7 +99,7 @@ function refreshpage()
                 if($task->getTaskEndDate()=="0000-00-00 00:00:00")
                 {
 
-                    ReaminingTime::countDown($task->getCategoryId(),$task->getTaskDueDate());
+                    RemainingTime::countDown($task->getCategoryId(),$task->getTaskDueDate());
                     ?>
                     <script></script><?php
                 }

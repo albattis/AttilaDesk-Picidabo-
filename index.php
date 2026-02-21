@@ -80,7 +80,7 @@ if($controllerName == "TaskController")
     }else if($actionName=="actionView")
     {
         $content=$controller->actionView($_GET["id"]);
-    }else if($actionName="actionInsert")
+    }else if($actionName=="actionInsert")
     {
         $content=$controller->actionInsert();
     }
