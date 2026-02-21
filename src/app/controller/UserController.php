@@ -104,7 +104,7 @@ header("Location: index.php");
             $user->setFirstname($data['firstname']);
             $user->setLastname($data['lastname']);
             $user->setUsername($data['username']);
-            $user->setPassword(hash('sha256', $data['password']));
+            $user->setPassword(password_hash($data['password'], PASSWORD_DEFAULT));
             $user->setAssignment($data['role']);
 
             if ($user->save()) {
